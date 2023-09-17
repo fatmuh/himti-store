@@ -88,8 +88,15 @@
                                 @csrf
                             </form>
 
-                        <a class="carts" href="javascript:void(0);"><span>4</span><img src="{{ asset('asset/images/cart.png') }}"
-                                alt=""></a>
+                        <a class="carts" href="{{ route('landing.cart') }}">
+                            <span>
+                                @php
+                                    $user_id = auth()->user()->id;
+                                    $cartCount = \App\Models\Cart::where('user_id', $user_id)->count();
+                                    echo $cartCount;
+                                @endphp
+                            </span>
+                            <img src="{{ asset('asset/images/cart.png') }}" alt=""></a>
                         @endguest
                     </div>
                 </div>

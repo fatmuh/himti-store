@@ -25,6 +25,7 @@ Route::controller(LandingController::class)->name('landing.')->group( function()
     Route::post('/cart/store', 'cartStore')->name('cart.store');
     Route::get('/cart', 'cart')->name('cart');
     Route::delete('/cart/delete/all/{id}', 'clearCart')->name('cart.clear');
+    Route::get('/checkout', 'checkout')->name('checkout');
 });
 
 Auth::routes();

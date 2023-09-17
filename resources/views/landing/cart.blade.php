@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="cart-totals">
-                        <h2>Cart Totals</h2>
+                        <h2>Detail</h2>
                         <table class="shop-table">
                             <tbody>
                                 <tr class="order-total">
@@ -97,7 +97,7 @@
                             </tbody>
                         </table>
                         <div class="wc-proceed-to-checkout">
-                            <a href="#" class="checkout-button">Proceed to checkout</a>
+                            <a href="{{ route('landing.checkout') }}" class="checkout-button">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>
