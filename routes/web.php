@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Landing\LandingController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +26,9 @@ Route::controller(LandingController::class)->name('landing.')->group( function()
     Route::get('/cart', 'cart')->name('cart');
     Route::delete('/cart/delete/all/{id}', 'clearCart')->name('cart.clear');
     Route::get('/checkout', 'checkout')->name('checkout');
+    Route::post('/checkout', 'checkoutStore')->name('checkout.store');
+    Route::get('/ticket','ticket')->name('ticket');
+    Route::get('/ticket/{uniq}','ticketDetail')->name('ticket.detail');
 });
 
 Auth::routes();
@@ -56,8 +59,7 @@ Route::middleware(['auth','ceklevel:Admin'])->group(function () {
 
     Route::controller(TransactionController::class)->prefix('admin/transaction')->name('admin.transaction.')->group( function() {
         Route::get('/', 'index')->name('index');
-        // Route::post('/', 'store')->name('store');
-        // Route::patch('/{id}/update', 'update')->name('update');
-        // Route::delete('/{id}/delete', 'delete')->name('delete');
+        Route::patch('/{id}/update', 'update')->name('update');
+        Route::delete('/{id}/delete', 'delete')->name('delete');
     });
 });

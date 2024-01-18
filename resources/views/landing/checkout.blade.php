@@ -19,7 +19,7 @@
 </section>
 <!-- Banner End -->
 
-<form action="" method="POST">
+<form method="POST" enctype="multipart/form-data">
     @csrf
     <!-- Checkout Section Start -->
     <section class="checkout-section">
@@ -86,7 +86,7 @@
                         <div class="woocommerce-checkout-payment" id="payment">
                             <ul class="wc_payment_methods payment_methods methods">
                                 <li class="wc_payment_method payment_method_bacs">
-                                    <input checked="checked" value="Transfer Bank" name="payment_method" class="input-radio" id="payment_method_bacs" type="radio">
+                                    <input checked="checked" value="transfer-bank" name="payment_method" class="input-radio" id="payment_method_bacs" type="radio">
                                     <label for="payment_method_bacs">Transfer Bank <i class="twi-building"></i></label>
                                     <div class="payment_box payment_method_bacs visibales">
                                         <p>
@@ -95,7 +95,7 @@
                                     </div>
                                 </li>
                                 <li class="wc_payment_method payment_method_cod">
-                                    <input value="cod" name="Transfer E-Wallet" class="input-radio" id="payment_method_cod" type="radio">
+                                    <input value="e-wallet" name="payment_method" class="input-radio" id="payment_method_cod" type="radio">
                                     <label for="payment_method_cod">E-Wallet <i class="twi-credit-card"></i></label>
                                     <div class="payment_box payment_method_cod">
                                         <p>
@@ -104,7 +104,7 @@
                                     </div>
                                 </li>
                                 <li class="wc_payment_method payment_method_paypal">
-                                    <input value="COD" name="payment_method" class="input-radio" id="payment_method_paypal" type="radio">
+                                    <input value="cod" name="payment_method" class="input-radio" id="payment_method_paypal" type="radio">
                                     <label for="payment_method_paypal">COD <i class="twi-shipping-fast"></i></label>
                                     <div class="payment_box payment_method_paypal">
                                         <p>
