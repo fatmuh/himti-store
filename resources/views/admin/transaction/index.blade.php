@@ -15,7 +15,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama Produk</th>
+                            <th>Invoice Code</th>
                             <th>Pembeli</th>
                             <th>Jumlah</th>
                             <th>Total Harga</th>
@@ -26,9 +26,9 @@
                         @foreach ($data as $transaksi)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $transaksi->product->name }}</td>
+                            <td>{{ $transaksi->uniq }}</td>
                             <td>{{ $transaksi->user->name }}</td>
-                            <td>{{ $transaksi->quantity }}</td>
+                            <td>{{ $transaksi->detail->sum('qty') }}</td>
                             <td>{{ "Rp".number_format($transaksi->price_total,2,',','.') }}</td>
                             <td><a href="" class="btn btn-light-info text-primary" data-bs-toggle="modal"
                                 data-bs-target="#ModalShow{{ $transaksi->id }}">
@@ -43,7 +43,8 @@
                                 <i class="ti ti-trash fs-5 text-center"></i>
                             </a></td>
                         </tr>
-                        {{-- @include('admin.category.edit') --}}
+                        @include('admin.transaction.show')
+                        @include('admin.transaction.edit')
                         {{-- @include('admin.category.delete') --}}
                         @endforeach
                     </tbody>

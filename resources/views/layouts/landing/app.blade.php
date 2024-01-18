@@ -58,9 +58,7 @@
                                 <a href="{{ route('landing.index') }}">Home</a>
                             </li>
                             <li><a href="{{ route('landing.index') }}#kategori">Kategori</a></li>
-                            <li><a href="contact.html">Produk</a></li>
-                            <li><a href="contact.html">Tentang</a></li>
-                            <li><a href="contact.html">Kontak</a></li>
+                            <li><a href="{{ route('landing.ticket') }}">Tiket</a></li>
                         </ul>
                     </nav>
                 </div>

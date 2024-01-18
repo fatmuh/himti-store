@@ -8,6 +8,9 @@ use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TransactionDetail;
+use Illuminate\Support\Facades\DB;
+
 
 class LandingController extends Controller
 {
@@ -87,8 +90,8 @@ class LandingController extends Controller
     public function checkoutStore(Request $request)
     {
         $params = $request->all();
-
-        $transaction = \DB::transaction(function() use ($params) {
+        $params['proof_of_payment'] = $request->file('proof_of_payment')->store('image/payment');
+        $transaction = DB::transaction(function() use ($params) {
 
             $carts = Cart::all();
 
@@ -97,14 +100,12 @@ class LandingController extends Controller
             }
 
             $totalHarga = $carts->sum('price_total');
-            $return = $params['accept'] - $totalHarga;
-
 
             $transactionParams = [
-                'product_id' => $params['product_id'],
+                'uniq' => $this->generateInvoiceUniq(),
                 'user_id' => auth()->user()->id,
-                'price_total' => $params['price_total'],
-                'type_of_payment' => $params['type_of_payment'],
+                'price_total' => $totalHarga,
+                'type_of_payment' => $params['payment_method'],
                 'proof_of_payment' => $params['proof_of_payment'],
                 'status' => 'Pending',
 			];
@@ -119,14 +120,14 @@ class LandingController extends Controller
                     $itemBaseTotal = $cart->quantity * $cart->product->price;
 
 					$orderItemParams = [
-						'product_id' => $cart->produk_id,
+						'product_id' => $cart->product_id,
 						'transaction_id' => $transaction->id,
 						'qty' => $cart->quantity,
-						'base_price' => $cart->produk->harga_jual,
+						'base_price' => $cart->product->price,
 						'base_total' => $itemBaseTotal,
 					];
 
-					$orderItem = DetailTransaksi::create($orderItemParams);
+					$orderItem = TransactionDetail::create($orderItemParams);
 
                     $cart->delete();
 				}
@@ -136,7 +137,18 @@ class LandingController extends Controller
         });
 
 		if ($transaction) {
-			return redirect()->route('transaksi.detail', $transaction->id)->with('toast_success', 'Transaction Successfully!');
+			return redirect()->route('landing.ticket.detail', $transaction->uniq)->with('toast_success', 'Transaction Successfully!');
 		}
+    }
+    public function ticket(){
+        $tickets = Transaction::where('user_id',auth()->user()->id)->latest()->get();
+        return view('landing.ticket',compact('tickets'));
+    }
+    public function ticketDetail($uniq){
+        $ticket = Transaction::where('uniq',$uniq)->first();
+        if(!$ticket){
+            return abort(404);
+        }
+        return view('landing.ticket-detail',compact('ticket'));
     }
 }

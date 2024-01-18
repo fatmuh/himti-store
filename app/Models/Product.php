@@ -27,14 +27,12 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function transaction()
-    {
-        return $this->hasOne(Transaction::class, 'product_id');
-    }
-
     public function cart()
     {
         return $this->hasOne(Transaction::class, 'product_id');
+    }
+    public function detail_transaction(){
+        return $this->hasMany(TransactionDetail::class);
     }
 
 }

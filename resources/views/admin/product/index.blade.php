@@ -25,6 +25,7 @@
                             <th>Kategori</th>
                             <th>Harga</th>
                             <th>Stok</th>
+                            <th>Terjual</th>
                             <th><i class="ti ti-settings"></i></th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                             <td>{{ $produk->category->name }}</td>
                             <td>{{ "Rp".number_format($produk->price,2,',','.') }}</td>
                             <td>{{ $produk->stock }}</td>
+                            <td>{{ $produk->detail_transaction->sum('qty') }}</td>
                             <td><a href="" class="btn btn-light-primary text-primary" data-bs-toggle="modal"
                                 data-bs-target="#ModalEdit{{ $produk->id }}">
                                 <i class="ti ti-pencil fs-5 text-center"></i>

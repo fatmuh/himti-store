@@ -11,7 +11,7 @@ class Transaction extends Model
 
     protected $table = 'transactions';
     protected $fillable = [
-        'product_id',
+        'uniq',
         'user_id',
         'price_total',
         'type_of_payment',
@@ -21,13 +21,11 @@ class Transaction extends Model
 
     protected $hidden;
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function detail(){
+        return $this->hasMany(TransactionDetail::class);
     }
 }
