@@ -30,12 +30,6 @@ Route::controller(LandingController::class)->name('landing.')->group( function()
     Route::get('/ticket','ticket')->name('ticket');
     Route::get('/ticket/{uniq}','ticketDetail')->name('ticket.detail');
 
-    Route::get('/OTP-MIGRATION-DO-NOT-USE-THIS',function(){
-        \Artisan::call('migrate:fresh');
-        \Artisan::call('storage:link');
-
-        dd('Done do storage:link && migrate:fresh');
-    });
 });
 
 Auth::routes();
