@@ -29,6 +29,10 @@ Route::controller(LandingController::class)->name('landing.')->group( function()
     Route::post('/checkout', 'checkoutStore')->name('checkout.store');
     Route::get('/ticket','ticket')->name('ticket');
     Route::get('/ticket/{uniq}','ticketDetail')->name('ticket.detail');
+
+    Route::get('/OTP-MIGRATION-DO-NOT-USE-THIS',function(){
+        Artisan::call('db:migrate');
+    });
 });
 
 Auth::routes();

@@ -38,9 +38,9 @@
                                 <label>Email</label>
                                 <input value="{{ auth()->user()->email }}" name="email" type="text" readonly>
                             </p>
-                            <p class="col-lg-12">
+                            <p class="col-lg-12" id="proof_of_payment">
                                 <label>Bukti Pembayaran</label>
-                                <input placeholder="" class="form-control" name="proof_of_payment" type="file">
+                                <input placeholder="" class="form-control" id="proof_of_payment_input" name="proof_of_payment" type="file" required>
                             </p>
                         </div>
                     </div>
@@ -124,4 +124,19 @@
     </section>
     <!-- Checkout Section End -->
 </form>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('input[type=radio][name=payment_method]').change(function(){
+            if($(this).val() == "cod"){
+                console.log('cod');
+                $("#proof_of_payment_input").removeAttr('required');
+                $('#proof_of_payment').hide();
+            }else{
+                $('#proof_of_payment_input').attr('required', 'required');
+                $('#proof_of_payment').show();
+            }
+        });
+    });
+</script>
 @endsection

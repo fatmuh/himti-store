@@ -86,6 +86,18 @@
                                         </div>
                                     </div>
                                 </div>
+@if($transaksi->type_of_payment != "cod")
+
+                                <div class="col-md-12 mt-2">
+                                    <div class="note-title">
+                                        <label>Bukti Pembayaran</label>
+                                        <div class="mt-2">
+                                            <img src="{{ url('storage/'.$transaksi->proof_of_payment) }}" alt="" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+@endif
 
                             </div>
                         </div>

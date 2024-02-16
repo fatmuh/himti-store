@@ -90,7 +90,7 @@ class LandingController extends Controller
     public function checkoutStore(Request $request)
     {
         $params = $request->all();
-        $params['proof_of_payment'] = $request->file('proof_of_payment')->store('image/payment');
+        $params['proof_of_payment'] = ($request->file('proof_of_payment'))? $request->file('proof_of_payment')->store('image/payment') : "COD";
         $transaction = DB::transaction(function() use ($params) {
 
             $carts = Cart::all();

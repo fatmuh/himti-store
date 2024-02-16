@@ -14,7 +14,7 @@ class AlterQtyOnDetailTransaction extends Migration
     public function up()
     {
         Schema::table('detail_transaction', function (Blueprint $table) {
-            $table->integer('qty')->unique()->after('product_id');
+            $table->integer('qty')->after('product_id');
         });
     }
 
